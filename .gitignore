@@ -1,3 +1,6 @@
+# Event Planner Bot ignores
+*.secrets
+
 # Logs
 logs
 *.log
