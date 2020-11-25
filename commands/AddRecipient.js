@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const Bot = require("../Main");
-const BotConfig = require("../Hidden.secrets/botconfig.json")
-const Recipients = require("./JSON/Recipients.json")
+const BotConfig = require("../Hidden.secrets/botconfig.json");
+const Recipients = require("./Recipients.json");
+const path = require("path");
 const fs = require("fs");
 
 /**
@@ -9,9 +10,13 @@ const fs = require("fs");
  * Adds it to a JSON file 
 */
 module.exports.run = async (Bot, message, args) => {
-    //if(Recipients) console.log("true");
 
-    let Recipts = JSON.parse(fs.readFileSync(`${Recipients}`, "utf8"));
+    if(args === null | 0)
+    {
+        return message.reply("You need to provide a user to add!");
+    }
+    
+    let Recipts = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./Recipients.json"), "utf-8")); 
     if(!Recipts[message.guild.id]) {
         Recipts[message.guild.id] = {};
     }
@@ -24,11 +29,11 @@ module.exports.run = async (Bot, message, args) => {
         Recipts: args[0]
     }
 
-    fs.writeFile(`${Recipients}`, JSON.stringify(Recipts), (err) => {
+    fs.writeFile(path.resolve(__dirname, "./Recipients.json"), JSON.stringify(Recipts), (err) => {
         if(err) console.log(err);
     })
 
-    message.reply(`Added <@!${Recipts[Recipts.length]}>`);
+    message.channel.send(`Added ${Recipients.Recipts[Recipts.length - 1]} to the recipient list! It Has ${Recipts.length} recipients`);
 }
 
 module.exports.Help = {

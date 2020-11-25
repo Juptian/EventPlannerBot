@@ -4,7 +4,7 @@ const BotConfig = require("../Hidden.secrets/botconfig.json")
 
 module.exports.run = async (Bot, message, args) => {
     console.log("help");
-    let Prefix = BotConfig.prefix;
+    let Prefix = BotConfig.PREFIX;
     message.delete();
     let sIcon = message.guild.iconURL;
     let hEmbed = new Discord.MessageEmbed()
