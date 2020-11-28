@@ -35,6 +35,7 @@ fs.readdir("./commands/", (err, files) => {
 		let Props = require(`./commands/${f}`);
 		console.log(`${f} loaded`);
         Bot.Commands.set(Props.Help.Name, Props);
+        Bot.Commands.set(Props.Help.Alternative, Props);
 	});
 });
 
@@ -57,7 +58,6 @@ Bot.on("message", async message => {
     if(message.channel.type === "dm") {
         return;
     }
-    
 
     //Variables
     let MessageArray = message.content.split(" ");
@@ -66,16 +66,13 @@ Bot.on("message", async message => {
 
     let CommandFile = Bot.Commands.get(Command.slice(prefix.length));
     
-    
-    //Other Checks
-
+    //Running the command
     if(CommandFile) { 
         CommandFile.run(Bot, message, args); 
     }
     else { 
-        message.channel.send(`Cannot find the ${Command}. It might not exist, double check spelling`);
+        message.channel.send(`Cannot find the \`${Command}\` command. It might not exist, double check spelling`);
     }
-
 })
 
 //Logging in

@@ -7,5 +7,6 @@ module.exports.run = async (Bot, message, args) => {
 }
 
 module.exports.Help = {
-    Name: "sendpoll"
+    Name: "sendpoll",
+    Alternative: "poll"
 }
