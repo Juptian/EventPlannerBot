@@ -27,36 +27,32 @@ module.exports.run = async (Bot, message, args) => {
     
     if(!Recipients[message.guild.id]) {
         Recipients[message.guild.id] = {
-            "List": {
-
-            }
+            "List": []
         };
+        JSON.stringify(Recipients[message.guild.id])
     }
-
-    for(var i = 0; i < Recipients[message.guild.id]; i++)
+    
+    let list = Recipients[message.guild.id].List;
+    
+    for(var i = 0; i < list.length + 1; i++)
     {
         if(Recipients[message.guild.id].List[i] == nMember)
         {
             return message.reply("user is already on the list!");
         }
     }
+    
+    Recipients[message.guild.id].List.push(`${nMember}`);
 
-    Recipients[message.guild.id] = {
-        "List": {
-            
-        }
-    };
-    let list = Recipients[message.guild.id].List;
-    //Recipients[message.guild.id].push(`${nMember}`);
+    try {
+        //fs.writeFileSync(path.resolve(__dirname, "./Recipients.json"), Recipients, 'utf8')
+        JSON.stringify(Recipients[message.guild.id], null, 2);
+    } catch (error) {
+        console.log(error);
+        message.channel.send(`There was an error adding ${nMemberName} to the list`);
+        return;
+    }
 
-    list[list.length - 1] = `${nMember}`;
-    list.length++;
-
-    await fs.writeFile(path.resolve(__dirname, "./Recipients.json"), JSON.stringify(Recipients, null, 2), (err) => {
-        if(err) console.log(err);
-    })
-
-    //message.channel.send(`Added ${Recipts[message.guild.id].length - 1} to the recipient list! It Has ${Recipts.length} recipients`);
     message.channel.send(`Added ${nMemberName}`);
 }
 

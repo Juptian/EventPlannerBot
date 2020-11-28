@@ -7,9 +7,9 @@ const Bot = new Discord.Client({disableEveryone: true});
 const fs = require("fs");
 const SuperAgent = require("superagent");
 
+
 //Other
 Bot.Commands = new Discord.Collection();
-
 
 /**
   * TODO :
