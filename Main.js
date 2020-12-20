@@ -59,13 +59,14 @@ Bot.on("message", async message => {
         try {
             let Recipients = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./commands/Recipients.json"), "utf-8"))
             let text = message.content.split(" ");
-    
             let answerArr = [`${text[1]}, ${message.author.id}`]
+            
             if(Recipients[text[0]][2][1] != null) {
-                Recipients[text[0]][2][1].push(`${text[1]}, ${text[1]}`)
+                Recipients[text[0]][2][1].push(`${answerArr[0]}, ${answerArr[1]}`)
             } else {
                 Recipients[text[0]][2].push(answerArr);
             }
+
             let arr = JSON.stringify(Recipients, null, 4);
             fs.writeFileSync('./commands/Recipients.json', arr);
             

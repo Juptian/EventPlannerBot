@@ -40,7 +40,7 @@ module.exports.run = async (Bot, message, args) => {
         user.send("", pollEmbed);
     }
     //sleep(workWeek)
-    await sleep(150000)
+    await sleep(day)
     Recipients = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./Recipients.json"), "utf-8"));
 
     let results = new Discord.MessageEmbed()
@@ -50,9 +50,10 @@ module.exports.run = async (Bot, message, args) => {
         if(Recipients[message.guild.id][2][1][i] == null) {
             continue
         }
+        x = i+1;
         let answer = Recipients[message.guild.id][2][1][i].split(", ")
         let rMember = message.guild.members.cache.get(answer[1])
-        results.addField(`Answer #${++i}`, `User: ${rMember} \nAnswer: ${answer[0]}`);
+        results.addField(`Answer #${x}`, `User: ${rMember} \nAnswer: ${answer[0]}`);
     }
     
     message.channel.send(results);
