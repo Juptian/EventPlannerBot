@@ -43,7 +43,7 @@ fs.readdir("./commands/", (err, files) => {
 //async so that it can do multiple things at once
 Bot.on("ready", () => {
     console.log(`Logged in as ${Bot.user.username}`);
-    Bot.user.setActivity("Helping to plan events");
+    Bot.user.setActivity("Event Planner simulator");
 });
 
 //Runs when a message is sent
@@ -55,9 +55,7 @@ Bot.on("message", async message => {
     if(!message.content.startsWith(`${prefix}`)) { return; }
     //Ignoring bots and DMS
     if(message.author.bot) { return; } 
-    if(message.channel.type === "dm") {
-        return;
-    }
+    if(message.channel.type === "dm") { return; }
 
     //Variables
     let MessageArray = message.content.split(" ");
@@ -73,7 +71,13 @@ Bot.on("message", async message => {
     else { 
         message.channel.send(`Cannot find the \`${Command}\` command. It might not exist, double check spelling`);
     }
-})
+});
+/*
+client.on('messageReactionAdd', (reaction, user) => { 
+    if(reaction.message.channel.type != "dm") { return; }
+
+}); */
 
 //Logging in
 Bot.login(Botconfig.TOKEN);
+
