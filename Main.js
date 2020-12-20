@@ -6,7 +6,7 @@ const Bot = new Discord.Client({disableEveryone: true});
 //Modules
 const fs = require("fs");
 const SuperAgent = require("superagent");
-
+const path = require('path');
 
 //Other
 Bot.Commands = new Discord.Collection();
@@ -52,10 +52,29 @@ Bot.on("message", async message => {
     //Prefix and check
     let prefix = Botconfig.PREFIX;
 
-    if(!message.content.startsWith(`${prefix}`)) { return; }
+    if(!message.content.startsWith(`${prefix}`) && message.channel.type != "dm") { return; }
     //Ignoring bots and DMS
     if(message.author.bot) { return; } 
-    if(message.channel.type === "dm") { return; }
+    if(message.channel.type == "dm" && message.content.includes(':thumbsup:' | ':thumbsdown:')) { 
+        try {
+            let Recipients = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./commands/Recipients.json"), "utf-8"))
+            let text = message.content.split(" ");
+    
+            let answerArr = [`${text[1]}, ${message.author.id}`]
+            if(Recipients[text[0]][2][1] != null) {
+                Recipients[text[0]][2][1].push(`${text[1]}, ${text[1]}`)
+            } else {
+                Recipients[text[0]][2].push(answerArr);
+            }
+            let arr = JSON.stringify(Recipients, null, 4);
+            fs.writeFileSync('./commands/Recipients.json', arr);
+            
+        } catch (err) {
+            console.log(err);
+            return message.reply('There was an error submitting your answer!');
+        }
+        return message.reply('Successfully aded your message!')
+    }
 
     //Variables
     let MessageArray = message.content.split(" ");
@@ -72,11 +91,11 @@ Bot.on("message", async message => {
         message.channel.send(`Cannot find the \`${Command}\` command. It might not exist, double check spelling`);
     }
 });
-/*
-client.on('messageReactionAdd', (reaction, user) => { 
+
+Bot.on('messageReactionAdd', (reaction, user) => { 
     if(reaction.message.channel.type != "dm") { return; }
 
-}); */
+});
 
 //Logging in
 Bot.login(Botconfig.TOKEN);

@@ -22,7 +22,6 @@ module.exports.run = async (Bot, message, args) => {
     }
 
     const index = Recipients[message.guild.id].indexOf(nMember);
-    console.log(index);
     if(index > -1) {
         delete Recipients[message.guild.id][index];
         Recipients[message.guild.id].slice(index, 1)

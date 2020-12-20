@@ -31,28 +31,36 @@ module.exports.run = async (Bot, message, args) => {
     }
     
     if(!Recipients[message.guild.id]) {
-        Recipients[message.guild.id] = [];
-        
+        Recipients[message.guild.id] = [
+            polls = [
+                910072
+            ],
+            users = [
+                null,
+            ],
+            answers = [
+                null
+            ]
+        ];
     }
-    let list = Recipients[message.guild.id];
-    
+    let list = Recipients[message.guild.id][1];
     for(var i = 0; i < list.length + 1; i++)
     {
-        if(Recipients[message.guild.id][i] == nMember)
+        if(Recipients[message.guild.id][1][i] == nMember)
         {
             return message.reply(`${nMemberName} is already on the list!`);
         }
     }
 
     for(let i = 0; i < list.length; i++) {
-        if(Recipients[message.guild.id][i] == null) {
-            Recipients[message.guild.id][i] = nMember;
+        if(Recipients[message.guild.id][1][i] == null) {
+            Recipients[message.guild.id][1][i] = nMember;
             let arr = JSON.stringify(Recipients, null, 4);
             fs.writeFileSync('./commands/Recipients.json', arr);
             return message.channel.send(`Added ${nMemberName}`);
         }
     }
-    Recipients[message.guild.id].push(nMember);
+    Recipients[message.guild.id][1].push(nMember);
     let arr = JSON.stringify(Recipients, null, 4);
     fs.writeFileSync('./commands/Recipients.json', arr);
     return message.channel.send(`Added ${nMemberName}`);
