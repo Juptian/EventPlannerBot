@@ -40,6 +40,7 @@ module.exports.run = async (Bot, message, args) => {
         user.send("", pollEmbed);
     }
     //sleep(workWeek)
+    
     await sleep(day)
     Recipients = JSON.parse(fs.readFileSync(path.resolve(__dirname, "./Recipients.json"), "utf-8"));
 
