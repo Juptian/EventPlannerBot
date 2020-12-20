@@ -1,5 +1,5 @@
 # Event planner bot ignores
-Hidden.secrets
+*.secrets
 
 # Logs
 logs
