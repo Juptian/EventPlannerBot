@@ -21,7 +21,7 @@ module.exports.run = async (Bot, message, args) => {
     let subject = args[0];
     let text = args.slice(1).join(" ");
     let list = Recipients[message.guild.id][0]
-    let pollID = (Math.floor((Math.random() * 1000000000) + 1) + Recipients[message.guild.id][0][Recipients[message.guild.id][0].length - 1])/Math.sqrt(Math.floor((Math.random() * 10) + 1));
+    let pollID = (Math.floor((Math.random() * 1000000000) + 1) + Recipients[message.guild.id][0][Recipients[message.guild.id][0].length - 1])/Math.sqrt(Recipients[message.guild.id][0][Recipients[message.guild.id][0].length - 1]);
 
     Recipients[message.guild.id][0].push(pollID);
     let arr = JSON.stringify(Recipients, null, 4);
