@@ -33,7 +33,7 @@ module.exports.run = async (Bot, message, args) => {
     if(!Recipients[message.guild.id]) {
         Recipients[message.guild.id] = [
             polls = [
-                910072
+                0
             ],
             users = [
                 null,
