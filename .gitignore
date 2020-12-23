@@ -3,6 +3,7 @@ json
 *.json
 Hidden.secrets/
 
+
 # Logs
 logs
 *.log
