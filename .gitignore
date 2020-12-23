@@ -1,6 +1,7 @@
 # Hidden
 json
-.json
+*.json
+Hidden.secrets/
 
 # Logs
 logs
