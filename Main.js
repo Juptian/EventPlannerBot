@@ -15,7 +15,6 @@ Bot.Commands = new Discord.Collection();
 // https://discord.com/oauth2/authorize?client_id=780176716211421225&scope=bot&permissions=8 //
 // JOIN LINK //
 
-
 //Reading the commands directory
 fs.readdir("./commands/", (err, files) => {
 	if(err) console.log(err);
