@@ -11,16 +11,10 @@ const path = require('path');
 //Other
 Bot.Commands = new Discord.Collection();
 
-/**
-  * TODO :
-  * * get this started!
-  * * Make more commands
-  * * Get back into the groove of js
-  * ! Look like you know what you're doing !
-*/
 // JOIN LINK //
 // https://discord.com/oauth2/authorize?client_id=780176716211421225&scope=bot&permissions=8 //
 // JOIN LINK //
+
 
 //Reading the commands directory
 fs.readdir("./commands/", (err, files) => {
